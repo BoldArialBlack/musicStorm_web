@@ -1,0 +1,318 @@
+<!--    Header
+    ============================================= -->
+<section id="main-header">
+    <div class="jumbotron" id="owl-hero-top" style="background-image: url(img/headtop/2.jpeg)">
+        <!--<div id="owl-hero-top" >-->
+        <div class="item">
+            <div class="caption">
+                <h1 style="color: white"><span>聚</span>音乐</h1>
+                <h4>搜索结果</h4>
+                <form class="form-inline" ng-init="init()" ng-submit="funSearch(searchInput)">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
+                            <input type="text" ng-model="searchInput" class="form-search" placeholder="Enter" required>
+                        </div>
+                        <button type="submit" class="btn btn-transparent">
+                            搜索
+                        </button>
+                    </fieldset>
+                </form>
+                <!--
+                <form  class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only">Search</label>
+                        <input type="search" class="form-search" placeholder="Enter">
+                    </div>
+                    <a href="search.html" class="btn-transparent">搜索</a>
+                </form>-->
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+
+</section>
+
+<!-- Welcome
+============================================= -->
+<section id="result">
+    <h4 ng-show="showResult">搜索“{{searchText}}”，结果有{{searchResult.length}}条</h4>
+    <div class="container">
+        <hr class="sep" ng-show="showResult">
+        <uib-tabset active="active" type="tabs">
+            <uib-tab index="0" heading="歌曲" active="true" select="bySong = true; funGetSong(searchText)">
+                <div class="container" id="bySong" ng-show="showResult">
+                    <div class="container table-responsive">
+                        <table class="table table-bordered table-hover table-striped"
+                               data-pagination="true" id="pagination-table">
+                            <thead>
+                            <tr>
+                                <th>歌曲</th>
+                                <th>歌手</th>
+                                <th>专辑</th>
+                                <th>时长</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in filteredItems">
+                                <td ng-controller="modalController">
+                                    <a href="" ui-sref="search/{{item.musicID}}"
+                                       ng-click="openModal(item.musicID, item.musicName, item.artistName)"
+                                       ng-bind="item.musicName"></a>
+                                </td>
+                                <td>
+                                    <a href="" ng-bind="item.artistName" ng-click="toArtist(item.artistName)"></a>
+                                </td>
+                                <td ng-bind="item.albumName"></td>
+                                <td ng-bind="item.length"></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+
+                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                            items-per-page="numPerPage"
+                            class="pagination" force-ellipses="true"
+                            first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页"
+                            boundary-links="true" boundary-link-numbers="true"></ul>
+
+                        <!-- <nav>
+                             <ul class="pagination">
+                                 <li>
+                                     <a href="" ng-click="Previous()">
+                                         <span>&laquo;</span>
+                                     </a>
+                                 </li>
+                                 <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                                     <a href="" ng-click="selectPage(page)" >{{ page }}</a>
+                                 </li>
+                                 <li>
+                                     <a href="" ng-click="Next()">
+                                         <span>&raquo;</span>
+                                     </a>
+                                 </li>
+                             </ul>-->
+                        </nav>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="歌手" select="bySong = false; funGetArtist(searchText)">
+                <div class="container" ng-show="showResult">
+                    <div class="row">
+                        <div ng-repeat="item in filteredItems" class="thumbnail col-lg-3 col-md-4 col-sm-6">
+                            <a href="" ng-click="toArtist(item.artistName)" class="img-thumbnail">
+                                <img ng-src="{{item.artistCover}}">
+                            </a>
+                            <h5><a href="" ng-click="toArtist(item.artistName)">{{item.artistName}}</a></h5>
+                        </div>
+                    </div>
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="" ng-click="Previous()">&laquo;</a>
+                            </li>
+                            <li ng-repeat="page in pageList" ng-click="{active: isActivePage(page)}">
+                                <a href="" ng-click="selectPage(page)">{{page}}</a>
+                                <!--<a href="" ng-click="selectPage(page)">{{page}}</a>-->
+                            </li>
+                            <li>
+                                <a href="" ng-click="Next()">&raquo;</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+
+
+        <!--<ul id="searchTab" class="nav nav-tabs">
+            <li class="active" ng-click="funcS(searchText,true)"><a data-toggle="tab">歌曲</a></li>
+            <li ng-click="funcS(searchText,false)"><a data-toggle="tab">歌手</a> </li>
+        </ul>
+
+        <data value="id=tabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="bySong">
+                <div ng-show="showResult" class="container table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead class="text-center">
+                        <tr>
+                            <th>歌曲</th>
+                            <th>歌手</th>
+                            <th>专辑</th>
+                            <th>时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in items">
+                            <td ng-controller="modalController">
+                                <a ui-sref="search/{{item.musicID}}" ng-click="openModal(item.musicID, item.musicName, item.artistName)" ng-bind="item.musicName"></a>
+                            </td>
+                            <td>
+                                <a ng-bind="item.artistName" ng-click="toArtist(item.artistName)" ng-bind="item.musicName"></a>
+                            </td>
+                            <td ng-bind="item.albumName"></td>
+                            <td ng-bind="item.length"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a ng-click="Previous()">
+                                    <span>&laquo;上一页</span>
+                                </a>
+                            </li>
+                            <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                                <a ng-click="selectPage(page)" >{{ page }}</a>
+                            </li>
+                            <li>
+                                <a ng-click="Next()">
+                                    <span>下一页&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="bySinger" >
+                <div class="container" ng-show="showResult">
+                    <div class="row-fliud">
+                        <ul>
+                            <li ng-repeat="item in items" class="thumbnail col-lg-3 col-md-4 col-sm-6"">
+                                <a ui-sref="search/{{item.artistId}}" class="img-thumbnail">
+                                    <img ng-src="item.artistCover">
+                                </a>
+                                <a ui-sref="search/{{item.artistId}}">{{item.artistName}}</a>
+                            </li>
+                        </ul>
+                        &lt;!&ndash;<div class="col-lg-3 col-md-4 col-sm-6" ng-repeat="item in items">
+                            <div class="thumbnail">
+                                <img ng-src={{item.artistCover}}>
+                                <h5><a>{{item.artistName}}</a></h5>
+                            </div>
+                        </div>&ndash;&gt;
+                    </div>
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a ng-click="Previous()">&laquo;</a>
+                            </li>
+                            <li ng-repeat="page in pageList" ng-click="{active: isActivePage(page)}">
+                                <a ng-click="selectPage(page)">{{page}}</a>
+                            </li>
+                            <li>
+                                <a ng-click="Next()">&raquo;</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </data>-->
+    </div>
+</section>
+</div>
+
+
+<!-- Portfolio
+============================================= -->
+<section id="portfolio">
+    <div class="container-fluid">
+
+        <hr class="sep">
+        <p>找不到您想要的结果？试试榜单</p>
+        <div class="row">
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a class="portfolio-box" href="" ng-click="toRank('rank')">
+                    <img src="img/portfolio/1.jpeg" class="img-responsive" alt="1">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank2')" href="" class="portfolio-box">
+                    <img src="img/portfolio/2.jpeg" class="img-responsive" alt="2">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank2
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank3')" href="" class="portfolio-box">
+                    <img src="img/portfolio/3.jpeg" class="img-responsive" alt="3">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank3
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank4')" href="" class="portfolio-box">
+                    <img src="img/portfolio/4.jpeg" class="img-responsive" alt="4">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank4
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank5')" href="" class="portfolio-box">
+                    <img src="img/portfolio/5.jpeg" class="img-responsive" alt="5">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank5
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank6')" href="" class="portfolio-box">
+                    <img src="img/portfolio/6.jpeg" class="img-responsive" alt="6">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank6
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

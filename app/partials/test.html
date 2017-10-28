@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="lib/bootstrap-assets/css/bootstrap.css" rel="stylesheet"/>
+    <title></title>
+
+    <script src="lib/angular-assets/js/angular.js"></script>
+    <script src="lib/angular-assets/js/ui-bootstrap-tpls.js"></script>
+    <script>
+
+        angular.module('ui.bootstrap.demo', ['ui.bootstrap']).controller('CarouselDemoCtrl', function ($scope) {
+            $scope.myInterval = 2000;
+            $scope.noWrapSlides = false;
+            $scope.active = 0;
+            var slides = $scope.slides = [];
+            var addSlide = function () {
+                slides.push({
+                    image: 'http://lorempixel.com/600/300',
+                    text: 'Image1',
+                    id: 0
+                });
+                slides.push({
+                    image: 'http://lorempixel.com/601/300',
+                    text: 'Image2',
+                    id: 1
+                });
+            };
+
+            addSlide();
+        });
+    </script>
+</head>
+<body>
+<div ng-controller="CarouselDemoCtrl">
+    <div style="height: 305px">
+        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4>Slide {{slide.id}}</h4>
+                    <p>{{slide.text}}</p>
+                </div>
+            </uib-slide>
+        </uib-carousel>
+    </div>
+</div>
+</body>
+
+</html>

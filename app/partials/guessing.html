@@ -1,0 +1,51 @@
+<!-- Header
+============================================= -->
+<section id="main-header" ng-controller="mainCtrl">
+    <div class="jumbotron" id="owl-hero-top" style="margin-bottom: 0px ;background-image: url(img/headtop/2.jpeg)">
+        <div class="item">
+            <div class="caption">
+                <h1 style="color: white"><span>聚</span>音乐</h1>
+                <h4>评论猜歌</h4>
+                <form class="form-inline" name="searchFrom" ng-submit="toSearch()">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
+                            <input type="text" class="form-search" placeholder="Enter" ng-model="searchText" required>
+                        </div>
+                        <button type="submit" class="btn btn-transparent" ng-disabled="searchForm.$invalid">
+                            搜索
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- guessing
+============================================= -->
+<section id="game" style="background: url(img/guessing/2.jpeg);">
+    <div class="container">
+        <h6 style="color: #ffffff;"> 以下评论属于哪一首歌曲？</h6>
+        <div class="question" ng-init="getQuestion()" ng-show="showQuestion">
+            <div class="question-context">
+                <p style="color: #ffffff;" ng-bind="question[0].title"></p>
+            </div>
+            <div class="container options">
+                <ul style="list-style-type:none; ">
+                    <li class="list-style-type:none; " ng-repeat="option in question[0].options">
+                        <a ng-click="isRight = funIsCorrect(option);isWrong = funIsWrong(option)"
+                           class="btn btn-transparent col-xs-12"
+                           ng-class-odd="'btn-transparent'" ng-class-even="'btn-light'"
+                           ng-class="{'btn-right':isRight ,'btn-wrong': isWrong}">{{option}}</a>
+                    </li>
+                </ul>
+                <!--<a ng-click="funIsCorrect('option_a')" class="btn btn-transparent col-xs-12">A {{question[0].optionA}}</a>-->
+                <!--<a ng-click="funIsCorrect('option_b')" class="btn btn-light col-xs-12">B {{question[0].optionB}}</a>-->
+                <!--<a ng-click="funIsCorrect('option_c')" class="btn btn-transparent col-xs-12" >C {{question[0].optionC}}</a>-->
+                <!--<a ng-click="funIsCorrect('option_d')" class="btn btn-light col-xs-12">D {{question[0].optionD}}</a>-->
+            </div>
+        </div>
+        <a href="" class="btn btn-light" style="margin-top: 5px;" ng-click="getQuestion()">></a>
+    </div>
+
+</section>

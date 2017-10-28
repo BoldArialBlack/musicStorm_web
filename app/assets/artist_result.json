@@ -1,0 +1,32 @@
+[
+  {
+    "artistID": 1,
+    "artistName": "artist",
+    "artistCover": "img/welcome/logo.png",
+    "artistProfile": "简介"
+  },
+  {
+    "artistID": 2,
+    "artistName": "artist2",
+    "artistCover": "img/welcome/logo.png",
+    "artistProfile": "简介"
+  },
+  {
+    "artistID": 3,
+    "artistName": "artist3",
+    "artistCover": "img/welcome/logo.png",
+    "artistProfile": "简介"
+  },
+  {
+    "artistID": 4,
+    "artistName": "artist4",
+    "artistCover": "img/welcome/logo.png",
+    "artistProfile": "简介"
+  },
+  {
+    "artistID": 5,
+    "artistName": "artist5",
+    "artistCover": "img/welcome/logo.png",
+    "artistProfile": "简介"
+  }
+]

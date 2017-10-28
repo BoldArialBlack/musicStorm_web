@@ -1,0 +1,137 @@
+<section id="main-header" ng-controller="mainCtrl">
+    <div class="jumbotron" id="owl-hero-top" style="background-image: url(img/headtop/2.jpeg)">
+        <div class="item">
+            <div class="caption">
+                <h1 style="color: white"><span>聚</span>音乐</h1>
+                <h4>歌手主页</h4>
+                <form class="form-inline" name="searchFrom" ng-submit="toSearch()">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
+                            <input type="text" class="form-search" placeholder="Enter" ng-model="searchText" required>
+                        </div>
+                        <button type="submit" class="btn btn-transparent" ng-disabled="searchForm.$invalid">
+                            搜索
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Welcome
+============================================= -->
+
+<section id="result">
+    <div class="container">
+        <div class="artist">
+            <h2 id="artist-name" ng-bind="artist.artistName"></h2>
+            <img id="artist-cover" src="{{artist.Cover}}">
+        </div>
+
+        <!--   <ul id="ArtistTab" class="nav nav-tabs">
+               <li class="active"><a href="#artist-songs" data-toggle="tab">歌曲</a> </li>
+               <li><a href="#profile" data-toggle="tab">简介</a> </li>
+           </ul>-->
+
+        <uib-tabset active="active" type="tabs">
+            <uib-tab index="0" heading="歌曲" active="true">
+                <div class="container table-responsive">
+                    <table class="table table-bordered table-hover" id="artist-info-table">
+                        <thead class="text-center">
+                        <tr>
+                            <th>歌名</th>
+                            <th>专辑</th>
+                            <th>时长</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in artWorks">
+                            <td ng-controller='modalController'>
+                                <a href="" ng-click="openModal(item.musicID, item.musicName, item.artistName)"
+                                   ng-bind="item.musicName"></a>
+                            </td>
+                            <td ng-bind="item.albumName"></td>
+                            <td ng-bind="item.length"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="" ng-click="Previous()">
+                                    <span>&laquo;</span>
+                                </a>
+                            </li>
+                            <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}">
+                                <a href="" ng-click="selectPage(page)">{{ page }}</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="Next()">
+                                    <span>&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="简介" active="true">
+                <div class="container">
+                    <p ng-bind="artist.profile"></p>
+                </div>
+            </uib-tab>
+            <!--<uib-tab index="1" heading="简介" class="fade">-->
+            <!--<div class="container" ng-bind="artist.profile">-->
+            <!--</div>-->
+            <!--</uib-tab>-->
+        </uib-tabset>
+    </div>
+    <!--<data value="id=tabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="artist-songs">
+            <div class="container table-responsive">
+                <table class="table table-bordered table-hover" id="artist-info-table">
+                    &lt;!&ndash;table-striped&ndash;&gt;
+                    <thead class="text-center">
+                    <tr>
+                        <th>歌名</th>
+                        <th>专辑</th>
+                        <th>时长</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in artWorks">
+                        <td ng-controller='modalController'>
+                            <a ng-click="openModal(item.musicID, item.musicName, item.artistName)" ng-bind="item.musicName"></a>
+                        </td>
+                        <td ng-bind="item.albumName"></td>
+                        <td ng-bind="item.length"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a ng-click="Previous()">
+                                <span>&laquo;</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}" >
+                            <a ng-click="selectPage(page)" >{{ page }}</a>
+                        </li>
+                        <li>
+                            <a ng-click="Next()">
+                                <span>&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile">
+            <div class="container" ng-bind="artist.profile">
+
+            </div>
+        </div>
+    </data>-->
+</section>

@@ -1,0 +1,178 @@
+<!-- Header
+============================================= -->
+
+<section id="main-header" ng-controller="mainCtrl">
+    <div class="jumbotron" id="owl-hero-top" style="background-image: url(img/headtop/2.jpeg)">
+        <div class="item">
+            <div class="caption">
+                <h1 style="color: white"><span>聚</span>音乐</h1>
+                <h4>排行榜</h4>
+                <form class="form-inline" name="searchFrom" ng-submit="toSearch()">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
+                            <input type="text" class="form-search" placeholder="Enter" ng-model="searchText" required>
+                        </div>
+                        <button type="submit" class="btn btn-transparent" ng-disabled="searchForm.$invalid">
+                            搜索
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section><!--
+<section class="main-header">
+    <div id="owl-hero-top" >
+        <div class="item" style="background-image: url(img/headtop/2.jpeg)">
+            <div class="caption">
+                <h1> <span>聚</span>音乐</h1>
+                <h6>排行榜</h6>
+                <form  class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only">Search</label>
+                        <input type="search" class="form-search" placeholder="Enter">
+                    </div>
+                    <a href="search.html" class="btn-transparent">搜索</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+<!-- Welcome
+============================================= -->
+<section id="result">
+    <div class="container">
+        <h3 ng-bind="rank.rankName"></h3>
+        <hr class="sep">
+        <div class="container table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>歌名</th>
+                    <th>歌手</th>
+                    <th>专辑</th>
+                    <th>时长</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in rankings">
+                    <td ng-controller="modalController">
+                        <a href="" ng-click="openModal(item.musicID, item.musicName, item.artistName)"
+                           ng-bind="item.musicName"></a>
+                    </td>
+                    <td>
+                        <a href="" ng-click="toArtist(item.artistName)" ng-bind="item.artistName"></a>
+                    </td>
+                    <td>{{item.albumName}}</td>
+                    <td>{{item.length}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- Portfolio
+============================================= -->
+<section id="portfolio">
+    <div class="container-fluid">
+
+        <hr class="sep">
+        <p>找不到您想要的结果？试试其他榜单</p>
+        <div class="row">
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a class="portfolio-box" ng-click="toRank('rank')">
+                    <img src="img/portfolio/1.jpeg" href="" class="img-responsive" alt="1">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank2')" class="portfolio-box">
+                    <img src="img/portfolio/2.jpeg" href="" class="img-responsive" alt="2">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank2
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank3')" class="portfolio-box">
+                    <img src="img/portfolio/3.jpeg" href="" class="img-responsive" alt="3">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank3
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank4')" class="portfolio-box">
+                    <img src="img/portfolio/4.jpeg" href="" class="img-responsive" alt="4">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank4
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank5')" href="" class="portfolio-box">
+                    <img src="img/portfolio/5.jpeg" class="img-responsive" alt="5">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank5
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay=".3s">
+                <a ng-click="toRank('rank6')" href="" class="portfolio-box">
+                    <img src="img/portfolio/6.jpeg" class="img-responsive" alt="6">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank6
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

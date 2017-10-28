@@ -1,0 +1,127 @@
+<!-- Header
+============================================= -->
+
+<section id="main-header" ng-controller="mainCtrl">
+    <div class="jumbotron" id="owl-hero-top" style="background-image: url(img/headtop/2.jpeg)">
+        <div class="item">
+            <div class="caption">
+                <h1 style="color: white"><span>聚</span>音乐</h1>
+                <h4>排行榜</h4>
+                <form class="form-inline" name="searchFrom" ng-submit="toSearch()">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="sr-only">Search</label>
+                            <input type="text" class="form-search" placeholder="Enter" ng-model="searchText" required>
+                        </div>
+                        <button type="submit" class="btn btn-transparent" ng-disabled="searchForm.$invalid">
+                            搜索
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Portfolio
+============================================= -->
+<section id="portfolio">
+    <div class="container-fluid" style="margin-left: 20px; margin-right: 20px">
+        <h2>榜单</h2>
+        <hr class="sep">
+        <p>资讯</p>
+        <div class="row">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a class="portfolio-box" href="" ng-click="toRank('rank')">
+                    <img href="ranking.html" src="img/portfolio/1.jpeg" class="img-responsive" alt="1">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a ng-click="toRank('rank2')" href="" class="portfolio-box">
+                    <img src="img/portfolio/2.jpeg" class="img-responsive" alt="2">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank2
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a ng-click="toRank('rank3')" href="" class="portfolio-box">
+                    <img src="img/portfolio/3.jpeg" class="img-responsive" alt="3">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank3
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a ng-click="toRank('rank4')" href="" class="portfolio-box">
+                    <img src="img/portfolio/4.jpeg" class="img-responsive" alt="4">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank4
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a ng-click="toRank('rank5')" href="" class="portfolio-box">
+                    <img src="img/portfolio/5.jpeg" class="img-responsive" alt="5">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank5
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s" style="padding: 10px">
+                <a ng-click="toRank('rank6')" href="" class="portfolio-box">
+                    <img src="img/portfolio/6.jpeg" class="img-responsive" alt="6">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Rank6
+                            </div>
+                            <div class="project-name">
+                                简介
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
